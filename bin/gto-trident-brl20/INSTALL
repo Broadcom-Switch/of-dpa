@@ -51,7 +51,7 @@ at CFE> prompt:
 
 Alternatively, you can write the Linux kernel/rootfs to the persistent flash:
   CFE> ifconfig -auto eth0
-  CFE> flash -noheader <tftp_server_ip>:<file_path>/gto-uimage flash5.lboot
+  CFE> flash -noheader <tftp_server_ip>:<file_path>/gto_uImage flash5.lboot
   CFE> setenv -p STARTUP 'boot -uboot flash5.lboot:
   CFE> reset -sysreset
 
