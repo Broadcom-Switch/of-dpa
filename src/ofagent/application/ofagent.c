@@ -52,6 +52,8 @@
 #include <AIM/aim_pvs_syslog.h>
 #include <BigList/biglist.h>
 #include <indigo/port_manager.h>
+#include <indigo/types.h>
+#include <indigo/of_state_manager.h>
 #include <SocketManager/socketmanager.h>
 #include <OFConnectionManager/ofconnectionmanager.h>
 #include <OFStateManager/ofstatemanager.h>
@@ -97,6 +99,7 @@ typedef struct
   int           debuglvl;
   int           debugComps[10]; // 10: TODO: update from OF Agent debug levels
 #endif
+  of_dpid_t     dpid;
 } arguments_t;
 
 /* The options we understand. */
@@ -109,6 +112,7 @@ static struct argp_option options[] =
 #endif /* OFAGENT_APP */
   { "controller", 't', "IP:PORT", 0,  "Controller" },
   { "listen",   'l',  "IP:PORT", 0,  "Listen" },
+  { "dpid", 'i',  "DATAPATHID", 0,  "Specify Datapath ID." },
   { 0 }
 };
 
@@ -267,6 +271,19 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
       errno = 0;
       listeners = biglist_append(listeners, arg);
       break;
+
+    case 'i':                           /* dpid */
+      errno = 0;
+
+      char *endptr;
+      arguments->dpid = strtoull(arg, &endptr, 16);
+      if (errno != 0)
+      {
+        argp_error(state, "Invalid dpid \"%s\", must be hex digit string", arg);
+        return errno;
+      }
+
+    break;
 
     case ARGP_KEY_NO_ARGS:
     case ARGP_KEY_END:
@@ -497,6 +514,7 @@ int main(int argc, char *argv[])
     .debuglvl   = 0,
     .debugComps = { 0 },
 #endif
+    .dpid = OFSTATEMANAGER_CONFIG_DPID_DEFAULT,
   };
 
   fileStemName = stemname(strdup(__FILE__));
@@ -526,6 +544,8 @@ int main(int argc, char *argv[])
     }
   }
 #endif
+  i += snprintf(&docBuffer[i], sizeof(docBuffer) - i, "DATAPATHID = 0x%016llX\n", (long long unsigned int)OFSTATEMANAGER_CONFIG_DPID_DEFAULT);
+
   i += snprintf(&docBuffer[i], sizeof(docBuffer) - i, "\n");
 
   AIM_LOG_STRUCT_REGISTER();
@@ -599,6 +619,10 @@ int main(int argc, char *argv[])
   if (arguments.agentdebuglvl >= INDIGO_LOGLEVEL_TRACE) {
       aim_log_fid_set_all(AIM_LOG_FLAG_TRACE, 1);
   }
+
+  /* Setup Indigo DPID */
+  printf("OF Datapath ID: 0x%016llX\n", (long long unsigned int)arguments.dpid);
+  (void)indigo_core_dpid_set(arguments.dpid);
 
   /* Initialize all modules */
   printf("Initializing the system.\r\n");
