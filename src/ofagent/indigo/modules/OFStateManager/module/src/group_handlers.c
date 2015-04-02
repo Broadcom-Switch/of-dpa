@@ -97,6 +97,9 @@ ind_core_group_mod_handler(of_object_t *_obj, indigo_cxn_id_t cxn_id)
     uint16_t err_type = OF_ERROR_TYPE_GROUP_MOD_FAILED;
     uint16_t err_code = OF_GROUP_MOD_FAILED_EPERM;
     indigo_error_t result;
+#ifdef OFDPA_FIXUP
+    uint32_t at_least_1grp_del;
+#endif
 
     of_group_mod_xid_get(obj, &xid);
     of_group_mod_command_get(obj, &command);
@@ -172,16 +175,37 @@ ind_core_group_mod_handler(of_object_t *_obj, indigo_cxn_id_t cxn_id)
     } else if (command == OF_GROUP_DELETE) {
         if (id == OF_GROUP_ALL) {
             list_links_t *cur, *next;
+#ifdef OFDPA_FIXUP
+            /* Go thru all groups with refcount 0 and delete them.
+             * Do as many iterations as needed */
+            do {
+                at_least_1grp_del = 0;
+
+                LIST_FOREACH_SAFE(&ind_core_groups_list, cur, next) {
+                    group = container_of(cur, links, ind_core_group_t);
+                    result = ind_core_group_delete_one(group);
+                    if (result == 0) {
+                        at_least_1grp_del = 1;
+                    }
+                }
+            } while (at_least_1grp_del == 1);
+
+            /* Now when all groups with refcount 0 are deleted check if
+             * there are still groups available */
             LIST_FOREACH_SAFE(&ind_core_groups_list, cur, next) {
                 group = container_of(cur, links, ind_core_group_t);
-#ifdef OFDPA_FIXUP
                 result = ind_core_group_delete_one(group);
                 if (result < 0) {
                     err_code = OF_GROUP_MOD_FAILED_INVALID_GROUP;
                     goto error;
                 }
-#endif
             }
+#else
+            LIST_FOREACH_SAFE(&ind_core_groups_list, cur, next) {
+                group = container_of(cur, links, ind_core_group_t);
+                ind_core_group_delete_one(group);
+            }
+#endif
         } else if (group != NULL) {
 #ifdef OFDPA_FIXUP
             result = ind_core_group_delete_one(group);
