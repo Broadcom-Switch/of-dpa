@@ -44,8 +44,8 @@ class Mods():
             dp,
             cookie = 0,
             cookie_mask = 0,
-            table_id = Utils.get_table(config["table"]),
-            command = Utils.get_mod_command(dp, config["cmd"]),
+            table_id = Utils.get_table(dp, config["table"]),
+            command = Utils.get_mod_flow_command(dp, config["cmd"]),
             idle_timeout = 0,
             hard_timeout = 0,
             priority = 0,
@@ -67,7 +67,7 @@ class Mods():
 
         mod = dp.ofproto_parser.OFPGroupMod(
             dp,
-            Utils.get_mod_command(dp, config["cmd"]),
+            Utils.get_mod_group_command(dp, config["cmd"]),
             Utils.get_mod_type(dp, config["type"]),
             Utils.get_mod_group(dp, config["group_id"]),
             buckets

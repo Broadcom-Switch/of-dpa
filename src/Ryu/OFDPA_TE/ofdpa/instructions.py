@@ -94,7 +94,7 @@ class Instructions():
 
     @staticmethod
     def process_goto(dp,config):
-        table = Utils.get_table(config["table"])
+        table = Utils.get_table(dp, config["table"])
         return dp.ofproto_parser.OFPInstructionGotoTable(table)
 
     @staticmethod

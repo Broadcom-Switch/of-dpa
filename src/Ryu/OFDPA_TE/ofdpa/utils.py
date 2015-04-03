@@ -32,9 +32,9 @@ class Utils():
             return int(str,16)
         else:
             return int(str)
-        
+
     @staticmethod
-    def get_table(table_name):
+    def get_table(dp, table_name):
         #
         TABLE_INGRESS = 0
         TABLE_VLAN = 10
@@ -67,12 +67,14 @@ class Utils():
         elif (table_name == "acl"):
             return TABLE_ACL
 
+        elif (table_name == "all"):
+            return dp.ofproto.OFPTT_ALL
+
         else:
             raise Exception("Wrong table name", table_name)
 
-
     @staticmethod
-    def get_mod_command(dp, cmd):
+    def get_mod_flow_command(dp, cmd):
         #
         if(cmd == "add"):
             return dp.ofproto.OFPFC_ADD
@@ -90,16 +92,31 @@ class Utils():
             return dp.ofproto.OFPFC_DELETE_STRICT
 
         else:
-            raise Exception("Wrong command", cmd)
+            raise Exception("Wrong flow command", cmd)
+
+    @staticmethod
+    def get_mod_group_command(dp, cmd):
+        #
+        if(cmd == "add"):
+            return dp.ofproto.OFPGC_ADD
+
+        elif(cmd == "mod"):
+            return dp.ofproto.OFPGC_MODIFY
+
+        elif(cmd == "del"):
+            return dp.ofproto.OFPGC_DELETE
+
+        else:
+            raise Exception("Wrong group command", cmd)
 
     @staticmethod
     def get_mod_group(dp, group):
         #
         if(group == "all"):
-            return dp.ofproto.OFPP_ALL
+            return dp.ofproto.OFPG_ALL
 
         if(group == "any"):
-            return dp.ofproto.OFPP_ANY
+            return dp.ofproto.OFPG_ANY
 
         else:
             return Utils.to_int(group)
