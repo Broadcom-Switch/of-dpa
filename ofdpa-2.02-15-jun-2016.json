@@ -218,7 +218,7 @@
       "range": "1..4095",
       "doc": [
         "12-bit VLAN id value from header field.",
-        "OpenFlow requires VLAN_ID encoded as a 16-bit field with OFPVID_PRESENT set."
+        "OpenFlow requires VLAN_VID encoded as a 16-bit field with OFPVID_PRESENT set."
       ]
     },
     {
@@ -227,7 +227,7 @@
       "doc": [
         "VLAN id associated with a physical port and used for VLAN assignment.",
         "Must be only one port_vid value for a physical port.",
-        "OpenFlow requires VLAN_ID encoded as a 16-bit field with OFPVID_PRESENT set.",
+        "OpenFlow requires VLAN_VID encoded as a 16-bit field with OFPVID_PRESENT set.",
         "This value does not include OFPVID_PRESENT."
       ]
     },
@@ -238,7 +238,7 @@
         "VLAN id associated with a physical port and used if VLAN assignment sets a two VLAN id stack.",
         "Usually used for the outermost VLAN id.",
         "Must be only one port_vid_2 value for a physical port.",
-        "OpenFlow requires VLAN_ID encoded as a 16-bit field with OFPVID_PRESENT set.",
+        "OpenFlow requires VLAN_VID encoded as a 16-bit field with OFPVID_PRESENT set.",
         "This value does not include OFPVID_PRESENT."
       ]
     },
@@ -436,7 +436,7 @@
     {
       "var": "<l3_in_port>",
       "doc": [
-        " L3 Virtual Ingress Port, used for multicast forwarding.",
+        "L3 Virtual Ingress Port, used for multicast forwarding.",
         "Pipeline metadata"
       ]
     },
@@ -779,15 +779,6 @@
       "exp_code": 23,
       "doc": [
         "OF-DPA Pipeline Field Identifier defined in OF-DPA 2.0."
-      ]
-    },
-    {
-      "id": "COPY_FIELD",
-      "type": "action",
-      "exp_id": "0x4F4E4600",
-      "exp_code": 3200,
-      "doc": [
-        "Action defined in EXT-320."
       ]
     },
     {
@@ -1679,7 +1670,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$LMEP_id",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             }
@@ -1737,7 +1728,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$LMEP_id",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             }
@@ -1762,7 +1753,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -1826,7 +1817,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$LMEP_id",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             }
@@ -1851,7 +1842,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -1904,7 +1895,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -1946,7 +1937,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$LMEP_id",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             }
@@ -1971,7 +1962,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -2044,7 +2035,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$LMEP_id",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             }
@@ -2069,7 +2060,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -2114,7 +2105,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -2199,7 +2190,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -2241,7 +2232,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "0",
               "match_type": "exact"
             }
@@ -2260,7 +2251,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "VLAN_ID",
+                  "field": "VLAN_VID",
                   "value": "<port_vid>|0x1000"
                 },
                 {
@@ -2273,7 +2264,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<port_vid_2>|0x1000"
                         }
                       ]
@@ -2309,7 +2300,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "0x1000",
               "match_type": "exact"
             }
@@ -2324,7 +2315,7 @@
               "actions": [
                 {
                   "action": "SET_FIELD",
-                  "field": "VLAN_ID",
+                  "field": "VLAN_VID",
                   "value": "<port_vid>|0x1000"
                 },
                 {
@@ -2337,7 +2328,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<port_vid_2>|0x1000"
                         }
                       ]
@@ -2371,7 +2362,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "0x1000",
               "match_type": "mask",
               "mask": "0x1000"
@@ -2413,7 +2404,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -2430,7 +2421,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     }
                   ]
@@ -2445,7 +2436,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -2479,7 +2470,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -2510,7 +2501,7 @@
           "doc": [
             "MPLS match criteria - single tagged VLAN.",
             "A port cannot have conflicting VLAN match and all traffic rules.",
-            "Next table is Ingress Maintenance Point if MEP or MIP configured. ",
+            "Next table is Ingress Maintenance Point if MEP or MIP configured.",
             "MPLS_TYPE can only be set to VPWS."
           ],
           "match_set": [
@@ -2520,7 +2511,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -2545,7 +2536,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     },
                     {
@@ -2585,7 +2576,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -2611,12 +2602,12 @@
           ]
         },
         {
-          "name": "MPLS L2 Untagged ",
+          "name": "MPLS L2 Untagged",
           "priority": "5",
           "doc": [
             "MPLS Match criteria untagged packet. Pushes and sets outer VLAN.",
             "A port cannot have conflicting untagged VLAN match and all traffic rules.",
-            "Next table is Ingress Maintenance Point if MEP or MIP configured. ",
+            "Next table is Ingress Maintenance Point if MEP or MIP configured.",
             "MPLS_TYPE can only be set to VPWS."
           ],
           "match_set": [
@@ -2626,7 +2617,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "0",
               "match_type": "exact"
             }
@@ -2657,7 +2648,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -2689,7 +2680,7 @@
           "doc": [
             "MPLS Match criteria priority tagged. Sets outer VLAN.",
             "A port cannot have conflicting untagged VLAN match and all traffic rules.",
-            "Next table is Ingress Maintenance Point if MEP or MIP configured. ",
+            "Next table is Ingress Maintenance Point if MEP or MIP configured.",
             "MPLS_TYPE can only be set to VPWS."
           ],
           "match_set": [
@@ -2699,7 +2690,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "0x1000",
               "match_type": "exact"
             }
@@ -2724,7 +2715,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     },
                     {
@@ -2755,7 +2746,7 @@
           "name": "MPLS L2 All Traffic on Port",
           "priority": "6",
           "doc": [
-            "MPLS - all traffic on port (VLAN match omitted, highest priority). ",
+            "MPLS - all traffic on port (VLAN match omitted, highest priority).",
             "A port cannot have conflicting VLAN match and  all traffic rules.",
             "Next table is Ingress Maintenance Point if MEP or MIP configured.",
             "MPLS_TYPE can only be set to VPWS."
@@ -2835,7 +2826,7 @@
           "name": "Stacked VLAN Assignment",
           "priority": "2",
           "doc": [
-            "Can restore VLAN stack by pushing the OVID that was matched on "
+            "Can restore VLAN stack by pushing the OVID that was matched on"
           ],
           "match_set": [
             {
@@ -2866,7 +2857,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     }
                   ]
@@ -2881,7 +2872,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -2905,8 +2896,8 @@
           "name": "MPLS L2 Stacked VLAN",
           "priority": "2",
           "doc": [
-            "Can restore VLAN stack by pushing the OVID that was matched on ",
-            "Next table is Ingress Maintenance Point if MIP configured. "
+            "Can restore VLAN stack by pushing the OVID that was matched on",
+            "Next table is Ingress Maintenance Point if MIP configured."
           ],
           "match_set": [
             {
@@ -2945,7 +2936,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     }
                   ]
@@ -2960,7 +2951,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -3014,7 +3005,7 @@
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "VLAN_ID",
+                  "field": "VLAN_VID",
                   "value": "<ovid>|0x1000"
                 }
               ]
@@ -3057,7 +3048,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             },
@@ -3120,7 +3111,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -3174,7 +3165,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -3230,7 +3221,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -3271,7 +3262,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -3305,7 +3296,7 @@
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -3360,7 +3351,7 @@
           ],
           "match_set": [
             {
-              "field": "MPLS_L2_PORT",
+              "field": "$MPLS_L2_PORT",
               "value": "<mpls_l2_port>",
               "match_type": "exact"
             },
@@ -3418,7 +3409,7 @@
           ],
           "match_set": [
             {
-              "field": "MPLS_L2_PORT",
+              "field": "$MPLS_L2_PORT",
               "value": "<mpls_l2_port>",
               "match_type": "exact"
             },
@@ -3476,7 +3467,7 @@
           ],
           "match_set": [
             {
-              "field": "MPLS_L2_PORT",
+              "field": "$MPLS_L2_PORT",
               "value": "<mpls_l2_port>",
               "match_type": "exact"
             },
@@ -3529,7 +3520,7 @@
           ],
           "match_set": [
             {
-              "field": "MPLS_L2_PORT",
+              "field": "$MPLS_L2_PORT",
               "value": "<mpls_l2_port>",
               "match_type": "exact"
             },
@@ -3721,7 +3712,7 @@
               "mask": "0x1000"
             },
             {
-              "field": "VLAN _PCP",
+              "field": "VLAN_PCP",
               "value": "<pcp>",
               "match_type": "exact"
             },
@@ -3802,7 +3793,7 @@
               "match_type": "exact"
             },
             {
-              "field": "ETH_DST ",
+              "field": "ETH_DST",
               "value": "<local_mac>",
               "match_type": "exact"
             },
@@ -3858,7 +3849,7 @@
               "match_type": "exact"
             },
             {
-              "field": "ETH_DST ",
+              "field": "ETH_DST",
               "value": "<local_mac>",
               "match_type": "exact"
             },
@@ -3909,10 +3900,10 @@
               "match_type": "exact"
             },
             {
-              "field": "ETH_DST ",
+              "field": "ETH_DST",
               "value": "01-00-5e-00-00-00",
               "match_type": "mask",
-              "mask": " ff-ff-ff-80-00-00"
+              "mask": "ff-ff-ff-80-00-00"
             }
           ],
           "instruction_set": [
@@ -3948,7 +3939,7 @@
               "match_type": "exact"
             },
             {
-              "field": "ETH_DST ",
+              "field": "ETH_DST",
               "value": "33-33-00-00-00-00",
               "match_type": "mask",
               "mask": "ff-ff-00-00-00-00"
@@ -3992,7 +3983,7 @@
               "match_type": "exact"
             },
             {
-              "field": "ETH_DST ",
+              "field": "ETH_DST",
               "value": "<local_mac>",
               "match_type": "exact"
             },
@@ -5555,11 +5546,6 @@
               "field": "$MPLS_ACH_CHANNEL",
               "value": "0x8902",
               "match_type": "exact"
-            },
-            {
-              "field": "match_type",
-              "value": "exact",
-              "match_type": "exact"
             }
           ],
           "instruction_set": [
@@ -6985,11 +6971,6 @@
               "field": "$MPLS_ACH_CHANNEL",
               "value": "0x8902",
               "match_type": "exact"
-            },
-            {
-              "field": "match_type",
-              "value": "exact",
-              "match_type": "exact"
             }
           ],
           "instruction_set": [
@@ -7460,7 +7441,7 @@
           ],
           "match_set": [
             {
-              "field": "LMEP ID",
+              "field": "$LMEP_ID",
               "value": "<lmep_id>",
               "match_type": "exact"
             },
@@ -7496,7 +7477,7 @@
           "name": "Table miss",
           "priority": "0",
           "doc": [
-            "Default rule, built in. ",
+            "Default rule, built in.",
             "Fixed rule, cannot be modified or deleted by controller."
           ],
           "match_set": [],
@@ -7545,7 +7526,7 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x0800 "
+                  "ethertype": "0x0800"
                 },
                 {
                   "action": "SET_FIELD",
@@ -7592,12 +7573,12 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x0800 "
+                  "ethertype": "0x0800"
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MAC_DST",
-                  "value": " <mac>"
+                  "field": "ETH_DST",
+                  "value": "<mac>"
                 },
                 {
                   "action": "SET_FIELD",
@@ -7637,7 +7618,7 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x86dd "
+                  "ethertype": "0x86dd"
                 },
                 {
                   "action": "SET_FIELD",
@@ -7685,12 +7666,12 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x86dd "
+                  "ethertype": "0x86dd"
                 },
                 {
                   "action": "SET_FIELD",
-                  "field": "MAC_DST",
-                  "value": " <mac>"
+                  "field": "ETH_DST",
+                  "value": "<mac>"
                 },
                 {
                   "action": "SET_FIELD",
@@ -7716,7 +7697,7 @@
               "match_type": "exact"
             },
             {
-              "field": "MPLS_TYPE",
+              "field": "$MPLS_TYPE",
               "value": "L3 PHP",
               "match_type": "exact"
             },
@@ -7736,7 +7717,7 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x0800 "
+                  "ethertype": "0x0800"
                 }
               ]
             }
@@ -7757,7 +7738,7 @@
               "match_type": "exact"
             },
             {
-              "field": "MPLS_TYPE",
+              "field": "$MPLS_TYPE",
               "value": "L3 PHP",
               "match_type": "exact"
             },
@@ -7777,7 +7758,7 @@
               "actions": [
                 {
                   "action": "POP_MPLS",
-                  "ethertype": "0x86dd "
+                  "ethertype": "0x86dd"
                 }
               ]
             }
@@ -7826,8 +7807,8 @@
               "match_type": "exact"
             },
             {
-              "field": "IP_DST",
-              "value": "<ipv4_dst>",
+              "field": "IPV4_DST",
+              "value": "<ipv4_addr>",
               "match_type": "exact"
             },
             {
@@ -7913,8 +7894,8 @@
               "match_type": "exact"
             },
             {
-              "field": "IP_DST",
-              "value": "<ipv4_dst>",
+              "field": "IPV4_DST",
+              "value": "<ipv4_addr>",
               "match_type": "prefix"
             },
             {
@@ -7987,8 +7968,8 @@
               "match_type": "exact"
             },
             {
-              "field": "IP_DST",
-              "value": "<ipv6_d>",
+              "field": "IPV6_DST",
+              "value": "<ipv6_addr>",
               "match_type": "exact"
             },
             {
@@ -8061,8 +8042,8 @@
               "match_type": "exact"
             },
             {
-              "field": "IP_DST",
-              "value": "<ipv6_d>",
+              "field": "IPV6_DST",
+              "value": "<ipv6_addr>",
               "match_type": "prefix"
             },
             {
@@ -8153,7 +8134,7 @@
           "priority": "1",
           "doc": [
             "Specific IPv4 multicast group address",
-            "VLAN_ID used for source removal"
+            "VLAN_VID used for source removal"
           ],
           "match_set": [
             {
@@ -8212,7 +8193,7 @@
           "priority": "1",
           "doc": [
             "Specific IPv6 multicast group address",
-            "VLAN_ID used for source removal"
+            "VLAN_VID used for source removal"
           ],
           "match_set": [
             {
@@ -8224,7 +8205,7 @@
               "field": "IPV6_DST",
               "value": "<ipv6_addr>",
               "match_type": "exact",
-              "const_mask": "ff00:0:0:0:0:0:0:0 ",
+              "const_mask": "ff00:0:0:0:0:0:0:0",
               "const_value": "ff00:0:0:0:0:0:0:0"
             },
             {
@@ -8293,7 +8274,7 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "$L3 IN_PORT",
+              "field": "$L3_IN_PORT",
               "value": "<l3_in_port>",
               "match_type": "exact"
             },
@@ -8344,7 +8325,7 @@
               "field": "IPV6_DST",
               "value": "<ipv6_addr>",
               "match_type": "exact",
-              "const_mask": "ff00:0:0:0:0:0:0:0 ",
+              "const_mask": "ff00:0:0:0:0:0:0:0",
               "const_value": "ff00:0:0:0:0:0:0:0"
             },
             {
@@ -8353,7 +8334,7 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "$L3 IN_PORT",
+              "field": "$L3_IN_PORT",
               "value": "<l3_in_port>",
               "match_type": "exact"
             },
@@ -8427,7 +8408,7 @@
               "const_value": "00-00-00-00-00-00"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -8476,7 +8457,7 @@
               "const_value": "01-00-00-00-00-00"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -8518,7 +8499,7 @@
           ],
           "match_set": [
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             }
@@ -8731,7 +8712,7 @@
               "match_type": "exact"
             },
             {
-              "field": "MPLS_L2_PORT",
+              "field": "$MPLS_L2_PORT",
               "value": "<local_mpls_l2_port>",
               "match_type": "exact"
             }
@@ -9033,7 +9014,7 @@
       ],
       "built_in_flow_mods": [
         {
-          "name": " Default",
+          "name": "Default",
           "priority": "0",
           "doc": [
             "Built-in rule, no action on a miss, but clear color actions index.",
@@ -9114,12 +9095,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_SRC",
+              "field": "IPV6_SRC",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv6_DST",
+              "field": "IPV6_DST",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
@@ -9179,7 +9160,7 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_FLABEL",
+              "field": "IPV6_FLABEL",
               "value": "<ipv6_flabel>",
               "match_type": "all_or_exact"
             }
@@ -9253,7 +9234,7 @@
                         },
                         {
                           "action": "GROUP",
-                          "group_id": "<L2 Unfiltered_Interface>"
+                          "group_id": "<L2 Unfiltered Interface>"
                         },
                         {
                           "action": "GROUP",
@@ -9340,12 +9321,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_SRC",
+              "field": "IPV6_SRC",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv6_DST",
+              "field": "IPV6_DST",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
@@ -9405,7 +9386,7 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_FLABEL",
+              "field": "IPV6_FLABEL",
               "value": "<ipv6_flabel>",
               "match_type": "all_or_exact"
             }
@@ -9561,12 +9542,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_SRC",
+              "field": "IPV6_SRC",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv6_DST",
+              "field": "IPV6_DST",
               "value": "<ipv6_addr>",
               "match_type": "mask"
             },
@@ -9626,7 +9607,7 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv6_FLABEL",
+              "field": "IPV6_FLABEL",
               "value": "<ipv6_flabel>",
               "match_type": "all_or_exact"
             },
@@ -9705,7 +9686,7 @@
                         },
                         {
                           "action": "GROUP",
-                          "group_id": "<L2 Unfiltered_Interface>"
+                          "group_id": "<L2 Unfiltered Interface>"
                         },
                         {
                           "action": "GROUP",
@@ -9802,12 +9783,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv4_SRC",
+              "field": "IPV4_SRC",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv4_DST",
+              "field": "IPV4_DST",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
@@ -9941,7 +9922,7 @@
                         },
                         {
                           "action": "GROUP",
-                          "group_id": "<L2 Unfiltered_Interface>"
+                          "group_id": "<L2 Unfiltered Interface>"
                         },
                         {
                           "action": "GROUP",
@@ -10028,12 +10009,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv4_SRC",
+              "field": "IPV4_SRC",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv4_DST",
+              "field": "IPV4_DST",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
@@ -10249,12 +10230,12 @@
               "match_type": "all_or_exact"
             },
             {
-              "field": "IPv4_SRC",
+              "field": "IPV4_SRC",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
             {
-              "field": "IPv4_DST",
+              "field": "IPV4_DST",
               "value": "<ipv4_addr>",
               "match_type": "mask"
             },
@@ -10393,7 +10374,7 @@
                         },
                         {
                           "action": "GROUP",
-                          "group_id": "<L2 Unfiltered_Interface>"
+                          "group_id": "<L2 Unfiltered Interface>"
                         },
                         {
                           "action": "GROUP",
@@ -10707,12 +10688,12 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             },
@@ -10742,7 +10723,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     },
                     {
@@ -10760,7 +10741,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -10779,12 +10760,12 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "exact"
             },
@@ -10822,12 +10803,12 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             },
@@ -10878,7 +10859,7 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
@@ -10913,7 +10894,7 @@
                   "zero_or_one": [
                     {
                       "action": "SET_FIELD",
-                      "field": "VLAN_ID",
+                      "field": "VLAN_VID",
                       "value": "<vid>|0x1000"
                     }
                   ]
@@ -10928,7 +10909,7 @@
                         },
                         {
                           "action": "SET_FIELD",
-                          "field": "VLAN_ID",
+                          "field": "VLAN_VID",
                           "value": "<vid>|0x1000"
                         }
                       ]
@@ -11009,12 +10990,12 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             },
@@ -11070,12 +11051,12 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             },
@@ -11083,7 +11064,7 @@
               "field": "ETH_DST",
               "value": "01-80-c2-00-00-38",
               "match_type": "mask",
-              "mask": "ff-ff-ff-ff-ff-ff-f8"
+              "mask": "ff-ff-ff-ff-ff-f8"
             }
           ],
           "instruction_set": [
@@ -11126,12 +11107,12 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -11177,12 +11158,12 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -11209,12 +11190,12 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -11249,12 +11230,12 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
             {
-              "field": "VLAN_VID ",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000",
               "match_type": "all_or_exact"
             }
@@ -11308,7 +11289,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
@@ -11377,7 +11358,7 @@
               "match_type": "exact"
             },
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
@@ -11440,7 +11421,7 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
@@ -11520,7 +11501,7 @@
           ],
           "match_set": [
             {
-              "field": "$ACTSET_OUTPUT ",
+              "field": "$ACTSET_OUTPUT",
               "value": "<pport_no>",
               "match_type": "exact"
             },
@@ -11536,7 +11517,7 @@
               "instruction": "APPLY_ACTIONS",
               "actions": [
                 {
-                  "action": "COPY_FIELD",
+                  "action": "$COPY_FIELD",
                   "field": "VLAN_VID",
                   "value": "$PACKET_REGS(1)"
                 },
@@ -11580,7 +11561,7 @@
               "instruction": "APPLY_ACTIONS",
               "actions": [
                 {
-                  "action": "COPY_FIELD",
+                  "action": "$COPY_FIELD",
                   "field": "VLAN_VID",
                   "value": "$PACKET_REGS(1)"
                 },
@@ -11629,7 +11610,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MAC_SRC",
+                  "field": "ETH_SRC",
                   "value": "<mac>"
                 }
               ]
@@ -11638,7 +11619,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MAC_DST",
+                  "field": "ETH_DST",
                   "value": "<mac>"
                 }
               ]
@@ -11647,7 +11628,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "VLAN_ID",
+                  "field": "VLAN_VID",
                   "value": "<vid>|0x1000"
                 }
               ]
@@ -11754,17 +11735,17 @@
           "action_set": [
             {
               "action": "SET_FIELD",
-              "field": "MAC_SRC",
+              "field": "ETH_SRC",
               "value": "<mac>"
             },
             {
               "action": "SET_FIELD",
-              "field": "MAC_DST",
+              "field": "ETH_DST",
               "value": "<mac>"
             },
             {
               "action": "SET_FIELD",
-              "field": "VLAN_ID",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000"
             },
             {
@@ -11826,21 +11807,21 @@
           "action_set": [
             {
               "action": "SET_FIELD",
-              "field": "MAC_SRC",
+              "field": "ETH_SRC",
               "value": "<mac>"
             },
             {
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MAC_DST",
+                  "field": "ETH_DST",
                   "value": "<mac>"
                 }
               ]
             },
             {
               "action": "SET_FIELD",
-              "field": "VLAN_ID",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000"
             },
             {
@@ -11934,8 +11915,8 @@
     {
       "name": "MPLS Fast Failover",
       "doc": [
-        "Working (1) or protection (0) path bucket. ",
-        "Next Label depends on specifics of packet flow. ",
+        "Working (1) or protection (0) path bucket.",
+        "Next Label depends on specifics of packet flow.",
         "Watch OAM Protection Liveness Logical Port.",
         "Both buckets must chain to the same group entry type.",
         "Naming Convention: Type [31:28]:10, Sub-Type [27:24]:6, Index{23:0]:0xnnnnnn"
@@ -11975,7 +11956,7 @@
           ]
         },
         {
-          "name": "Protection(0) ",
+          "name": "Protection(0)",
           "doc": [
             "watch : <lport_no>"
           ],
@@ -12086,7 +12067,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 }
               ]
@@ -12175,11 +12156,11 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
-                  "action": "$COPY_TTL_OUT"
+                  "action": "COPY_TTL_OUT"
                 }
               ]
             },
@@ -12200,7 +12181,7 @@
       ]
     },
     {
-      "name": "MPLS Swap Label Group",
+      "name": "MPLS Swap Label",
       "doc": [
         "Used for LSR.",
         "Naming Convention : Type [31:28]:9, Sub-Type [27:24]:5, Index [23:0]:0xnnnnnn"
@@ -12254,7 +12235,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 }
               ]
@@ -12338,7 +12319,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -12367,7 +12348,7 @@
       ]
     },
     {
-      "name": "MPLS Tunnel label 2",
+      "name": "MPLS Tunnel Label 2",
       "doc": [
         "Used to push a third label for certain flows (e.g., ring label).",
         "Naming Convention : Type [31:28]:9, Sub-Type [27:24]:4, Index [23:0]:0xnnnnnn"
@@ -12425,7 +12406,7 @@
               "zero_or_one": [
                 {
                   "action": "SET_FIELD",
-                  "field": "MPLS_TTL",
+                  "field": "$MPLS_TTL",
                   "ttl": "<ttl>"
                 },
                 {
@@ -12481,17 +12462,17 @@
           "action_set": [
             {
               "action": "SET_FIELD",
-              "field": "MAC_SRC",
+              "field": "ETH_SRC",
               "value": "<mac>"
             },
             {
               "action": "SET_FIELD",
-              "field": "MAC_DST",
+              "field": "ETH_DST",
               "value": "<mac>"
             },
             {
               "action": "SET_FIELD",
-              "field": "VLAN_ID",
+              "field": "VLAN_VID",
               "value": "<vid>|0x1000"
             },
             {
